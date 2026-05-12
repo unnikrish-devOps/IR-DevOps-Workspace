@@ -1,4 +1,4 @@
-name: Remote Repo Build Test
+name: Remote Repo Test
 
 on:
   workflow_dispatch:
@@ -11,8 +11,9 @@ jobs:
       - name: Checkout Remote Repo
         uses: actions/checkout@v4
         with:
-          repository: dotnet/samples
-          lfs: true
+          repository: unnikrish-devOps/Sample-Dotnet
+          path: source
+          # token: ${{ secrets.PAT_TOKEN }}
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -20,9 +21,9 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Restore
-        working-directory: source/core/console-apps/HelloWorld/HelloWorld
+        working-directory: source
         run: dotnet restore
 
       - name: Build
-        working-directory: source/core/console-apps/HelloWorld/HelloWorld
+        working-directory: source
         run: dotnet build --configuration Release
