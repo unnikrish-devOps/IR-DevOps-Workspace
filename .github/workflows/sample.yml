@@ -14,15 +14,18 @@ jobs:
           repository: dotnet/samples
           path: source
 
+      - name: List Files
+        run: ls -R source | head -100
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
 
       - name: Restore
-        working-directory: source/core/console-apps/HelloWorld
+        working-directory: source/core/console-apps/HelloWorld/HelloWorld
         run: dotnet restore
 
       - name: Build
-        working-directory: source/core/console-apps/HelloWorld
+        working-directory: source/core/console-apps/HelloWorld/HelloWorld
         run: dotnet build --configuration Release
